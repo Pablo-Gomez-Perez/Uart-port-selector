@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Module name="main">
+    <SubModule name="us">
+        <SubModule name="mux">
+            <SubModule name="tri_1" Lut="1"/>
+        </SubModule>
+        <SubModule name="dmx" Lut="1"/>
+    </SubModule>
+</Module>

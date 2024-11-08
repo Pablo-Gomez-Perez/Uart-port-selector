@@ -5,6 +5,52 @@
   "InstName" : "main",
   "ModuleFile" : "C:/Users/PABLO-LAP-LENOVO/Documents/gti programing projects/hdl/UartSelector/SystemVerilog/UART_selector/src/main.sv",
   "ModuleLine" : 1,
-  "ModuleName" : "main"
+  "ModuleName" : "main",
+  "SubInsts" : [
+   {
+    "InstFile" : "C:/Users/PABLO-LAP-LENOVO/Documents/gti programing projects/hdl/UartSelector/SystemVerilog/UART_selector/src/main.sv",
+    "InstLine" : 16,
+    "InstName" : "us",
+    "ModuleFile" : "C:/Users/PABLO-LAP-LENOVO/Documents/gti programing projects/hdl/UartSelector/SystemVerilog/UART_selector/src/main.sv",
+    "ModuleLine" : 40,
+    "ModuleName" : "uart_selector",
+    "SubInsts" : [
+     {
+      "InstFile" : "C:/Users/PABLO-LAP-LENOVO/Documents/gti programing projects/hdl/UartSelector/SystemVerilog/UART_selector/src/main.sv",
+      "InstLine" : 42,
+      "InstName" : "mux",
+      "ModuleFile" : "C:/Users/PABLO-LAP-LENOVO/Documents/gti programing projects/hdl/UartSelector/SystemVerilog/UART_selector/src/main.sv",
+      "ModuleLine" : 26,
+      "ModuleName" : "mux_triState",
+      "SubInsts" : [
+       {
+        "InstFile" : "C:/Users/PABLO-LAP-LENOVO/Documents/gti programing projects/hdl/UartSelector/SystemVerilog/UART_selector/src/main.sv",
+        "InstLine" : 28,
+        "InstName" : "tri_1",
+        "ModuleFile" : "C:/Users/PABLO-LAP-LENOVO/Documents/gti programing projects/hdl/UartSelector/SystemVerilog/UART_selector/src/main.sv",
+        "ModuleLine" : 20,
+        "ModuleName" : "triState"
+       },
+       {
+        "InstFile" : "C:/Users/PABLO-LAP-LENOVO/Documents/gti programing projects/hdl/UartSelector/SystemVerilog/UART_selector/src/main.sv",
+        "InstLine" : 29,
+        "InstName" : "tri_2",
+        "ModuleFile" : "C:/Users/PABLO-LAP-LENOVO/Documents/gti programing projects/hdl/UartSelector/SystemVerilog/UART_selector/src/main.sv",
+        "ModuleLine" : 20,
+        "ModuleName" : "triState"
+       }
+      ]
+     },
+     {
+      "InstFile" : "C:/Users/PABLO-LAP-LENOVO/Documents/gti programing projects/hdl/UartSelector/SystemVerilog/UART_selector/src/main.sv",
+      "InstLine" : 43,
+      "InstName" : "dmx",
+      "ModuleFile" : "C:/Users/PABLO-LAP-LENOVO/Documents/gti programing projects/hdl/UartSelector/SystemVerilog/UART_selector/src/main.sv",
+      "ModuleLine" : 33,
+      "ModuleName" : "demux"
+     }
+    ]
+   }
+  ]
  }
 ]

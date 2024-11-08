@@ -1,0 +1,205 @@
+//
+//Written by GowinSynthesis
+//Tool Version "V1.9.9"
+//Thu Nov  7 20:03:48 2024
+
+//Source file index table:
+//file0 "\C:/Users/PABLO-LAP-LENOVO/Documents/gti\ programing\ projects/hdl/UartSelector/SystemVerilog/UART_selector/src/main.sv"
+`timescale 100 ps/100 ps
+module triState (
+  Rx_ESP_Master_d,
+  Rx_Esp_Sim_d,
+  Led_Selector_d,
+  Tx_Pc_18_Z
+)
+;
+input Rx_ESP_Master_d;
+input Rx_Esp_Sim_d;
+input Led_Selector_d;
+output Tx_Pc_18_Z;
+wire VCC;
+wire GND;
+  LUT3 Tx_Pc_18_Z_s (
+    .F(Tx_Pc_18_Z),
+    .I0(Rx_ESP_Master_d),
+    .I1(Rx_Esp_Sim_d),
+    .I2(Led_Selector_d) 
+);
+defparam Tx_Pc_18_Z_s.INIT=8'hCA;
+  VCC VCC_cZ (
+    .V(VCC)
+);
+  GND GND_cZ (
+    .G(GND)
+);
+endmodule /* triState */
+module mux_triState (
+  Rx_ESP_Master_d,
+  Rx_Esp_Sim_d,
+  Led_Selector_d,
+  Tx_Pc_18_Z
+)
+;
+input Rx_ESP_Master_d;
+input Rx_Esp_Sim_d;
+input Led_Selector_d;
+output Tx_Pc_18_Z;
+wire VCC;
+wire GND;
+  triState tri_1 (
+    .Rx_ESP_Master_d(Rx_ESP_Master_d),
+    .Rx_Esp_Sim_d(Rx_Esp_Sim_d),
+    .Led_Selector_d(Led_Selector_d),
+    .Tx_Pc_18_Z(Tx_Pc_18_Z)
+);
+  VCC VCC_cZ (
+    .V(VCC)
+);
+  GND GND_cZ (
+    .G(GND)
+);
+endmodule /* mux_triState */
+module demux (
+  Rx_Esp_Sim_d,
+  Led_Selector_d,
+  Tx_Esp_Sim_d
+)
+;
+input Rx_Esp_Sim_d;
+input Led_Selector_d;
+output Tx_Esp_Sim_d;
+wire VCC;
+wire GND;
+  LUT2 Tx_Esp_Sim_d_s (
+    .F(Tx_Esp_Sim_d),
+    .I0(Rx_Esp_Sim_d),
+    .I1(Led_Selector_d) 
+);
+defparam Tx_Esp_Sim_d_s.INIT=4'hB;
+  VCC VCC_cZ (
+    .V(VCC)
+);
+  GND GND_cZ (
+    .G(GND)
+);
+endmodule /* demux */
+module uart_selector (
+  Rx_Esp_Sim_d,
+  Led_Selector_d,
+  Rx_ESP_Master_d,
+  Tx_Esp_Sim_d,
+  Tx_Pc_18_Z
+)
+;
+input Rx_Esp_Sim_d;
+input Led_Selector_d;
+input Rx_ESP_Master_d;
+output Tx_Esp_Sim_d;
+output Tx_Pc_18_Z;
+wire VCC;
+wire GND;
+  mux_triState mux (
+    .Rx_ESP_Master_d(Rx_ESP_Master_d),
+    .Rx_Esp_Sim_d(Rx_Esp_Sim_d),
+    .Led_Selector_d(Led_Selector_d),
+    .Tx_Pc_18_Z(Tx_Pc_18_Z)
+);
+  demux dmx (
+    .Rx_Esp_Sim_d(Rx_Esp_Sim_d),
+    .Led_Selector_d(Led_Selector_d),
+    .Tx_Esp_Sim_d(Tx_Esp_Sim_d)
+);
+  VCC VCC_cZ (
+    .V(VCC)
+);
+  GND GND_cZ (
+    .G(GND)
+);
+endmodule /* uart_selector */
+module main (
+  clk,
+  reset,
+  select,
+  Rx_ESP_Master,
+  Rx_Esp_Sim,
+  Rx_Pc_17,
+  Tx_Pc_18,
+  Tx_Esp_Master,
+  Tx_Esp_Sim,
+  Led_Selector,
+  Led_Reset
+)
+;
+input clk;
+input reset;
+input select;
+input Rx_ESP_Master;
+input Rx_Esp_Sim;
+input Rx_Pc_17;
+output Tx_Pc_18;
+output Tx_Esp_Master;
+output Tx_Esp_Sim;
+output Led_Selector;
+output Led_Reset;
+wire Led_Reset_d;
+wire Led_Selector_d;
+wire Rx_ESP_Master_d;
+wire Rx_Esp_Sim_d;
+wire Tx_Esp_Sim_d;
+wire Tx_Pc_18_Z;
+wire VCC;
+wire GND;
+  IBUF reset_ibuf (
+    .O(Led_Reset_d),
+    .I(reset) 
+);
+  IBUF select_ibuf (
+    .O(Led_Selector_d),
+    .I(select) 
+);
+  IBUF Rx_ESP_Master_ibuf (
+    .O(Rx_ESP_Master_d),
+    .I(Rx_ESP_Master) 
+);
+  IBUF Rx_Esp_Sim_ibuf (
+    .O(Rx_Esp_Sim_d),
+    .I(Rx_Esp_Sim) 
+);
+  TBUF Tx_Pc_18_s0 (
+    .O(Tx_Pc_18),
+    .I(Tx_Pc_18_Z),
+    .OEN(GND) 
+);
+  OBUF Tx_Esp_Master_obuf (
+    .O(Tx_Esp_Master),
+    .I(Tx_Esp_Sim_d) 
+);
+  OBUF Tx_Esp_Sim_obuf (
+    .O(Tx_Esp_Sim),
+    .I(Tx_Esp_Sim_d) 
+);
+  OBUF Led_Selector_obuf (
+    .O(Led_Selector),
+    .I(Led_Selector_d) 
+);
+  OBUF Led_Reset_obuf (
+    .O(Led_Reset),
+    .I(Led_Reset_d) 
+);
+  uart_selector us (
+    .Rx_Esp_Sim_d(Rx_Esp_Sim_d),
+    .Led_Selector_d(Led_Selector_d),
+    .Rx_ESP_Master_d(Rx_ESP_Master_d),
+    .Tx_Esp_Sim_d(Tx_Esp_Sim_d),
+    .Tx_Pc_18_Z(Tx_Pc_18_Z)
+);
+  VCC VCC_cZ (
+    .V(VCC)
+);
+  GND GND_cZ (
+    .G(GND)
+);
+  GSR GSR (
+    .GSRI(VCC) 
+);
+endmodule /* main */
